@@ -1,0 +1,4 @@
+Test data is data which has been specifically identified for use in tests, typically of a computer program.
+Some data may be used in a confirmatory way, typically to verify that a given set of input to a given function produces some expected result. Other data may be used in order to challenge the ability of the program to respond to unusual, extreme, exceptional, or unexpected input.
+Test data may be produced in a focused or systematic way (as is typically the case in domain testing), or by using other, less-focused approaches (as is typically the case in high-volume randomized automated tests). Test data may be produced by the tester, or by a program or function that aids the tester. 
+Test data may be recorded for re-use, or used once and then forgotten.

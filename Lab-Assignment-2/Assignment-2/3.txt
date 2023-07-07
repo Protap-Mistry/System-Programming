@@ -1,0 +1,3 @@
+Software testing is an important part of the Software Development Life Cycle today.
+It is a labor-intensive and also accounts for nearly half of the cost of the system development.
+Hence, it is desired that parts of testing should be automated. An important problem in testing is that of generating quality test data and is seen as an important step in reducing the cost of software testing. Hence, test data generation is an important part of software testing.

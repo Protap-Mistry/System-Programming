@@ -1,0 +1,2 @@
+Domain testing is a family of test techniques that focus on the test data. 
+This might include identifying common or critical inputs, representatives of a particular equivalence class model, values that might appear at the boundaries between one equivalence class and another, outrageous values that should be rejected by the program, combinations of inputs, or inputs that might drive the product towards a particular set of outputs.

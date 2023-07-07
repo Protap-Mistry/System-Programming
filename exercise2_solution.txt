@@ -1,0 +1,152 @@
+#!/bin/bash
+
+# assign1.bash
+
+option=""
+until [ "$option" = "F" ]; do
+echo "C - create a new item"
+echo "R - read an existing item"
+echo "U - update an existing item"
+echo "D - delete an existing item"
+echo "Choose a option"
+read option
+case $option in
+C)
+./create.bash
+R)
+./read.bash
+U)
+./update.bash
+D)
+./delete.bash
+*) echo "Invalid option"
+;;
+esac
+done
+
+#!/bin/bash
+
+# create.bash
+
+read item_number
+read simple_name
+read item_name
+read current_qty
+read max_qty
+read description
+
+first_row="${simple_name} ${item_name}"
+second_row="${current_qty} ${max_qty}"
+third_row="${description}"
+
+file_name=${item_number}.item
+if [ -s $file_name ]
+then
+echo "item already exists"
+else
+
+echo $first_row > "$file_name"
+echo $second_row >> "$file_name"
+echo -e $third_row >> "$file_name"
+date=`date`
+log="CREATED: ${simple_name} - ${date}"
+pwd=`pwd`
+echo -e $log >> $pwd/queries.log
+fi
+
+#!/bin/bash
+
+# create.bash
+
+read input_number
+
+file_name="./${item_number}.item"
+
+if [ -s $file_name ]
+then
+first_line=`head -1 $file_name`
+second_line=`awk 'NR==2' $file_name`
+third_line=`awk 'NR==3' $file_name`
+item=`echo $first_line | awk -F' ' '{print $1}'`   
+name=`echo $first_line | awk -F' ' '{print $2}'`
+qty=`echo $second_line | awk -F' ' '{print $1}'`   
+max_qty=`echo $second_line | awk -F' ' '{print $2}'`
+echo "Item Name: ${item}"
+echo "Simple Name: ${name}"
+echo "Quantity: ${qty} / ${max_qty}"
+echo "Description: ${third_line}"
+done < $file_name
+else
+echo "item not found"
+
+#!/bin/bash
+
+#update.bash
+
+read item_number
+read simple_name
+read item_name
+read current_qty
+read max_qty
+read description
+
+if [ ! -s $file_name ]
+then  
+echo "Item not found"
+return
+fi
+
+file_name="${$item_name}.item";
+first_line=`head -1 $file_name`
+second_line=`awk 'NR==2' $file_name`
+third_line=`awk 'NR==3' $file_name`
+item=`echo $first_line | awk -F' ' '{print $1}'`   
+name=`echo $first_line | awk -F' ' '{print $2}'`
+qty=`echo $second_line | awk -F' ' '{print $1}'`   
+max_qty=`echo $second_line | awk -F' ' '{print $2}'`
+if [ -z "$simple_name" ]
+then
+simple_name=$name
+fi
+if [ -z "$current_qty" ]
+then
+current_qty=$qty
+fi
+if [ -z "$max_qty" ]
+then
+max_qty=$max
+fi
+if [ -z "$description" ]
+then
+description=$third_line
+fi
+
+first_row="${simple_name} ${item_name}"
+second_row="${current_qty} ${max_qty}"
+third_row="${description}"
+
+echo $first_row > "$file_name"
+echo $second_row >> "$file_name"
+echo -e $third_row >> "$file_name"
+date=`date`
+log="UPDATED: ${simple_name} - ${date}"
+pwd=`pwd`
+echo -e $log >> $pwd/queries.log
+
+#!/bin/bash
+
+#delete.bash
+
+read item_number
+file_name=${item_number}.item
+if [ -s $file_name ]
+then
+first_line=`head -1 $file_name`
+name=`echo $first_line | awk -F' ' '{print $2}'`
+rm -f $file_name
+log="DELETED: ${name} - ${date}"
+pwd=`pwd`
+echo -e $log >> $pwd/queries.log
+else
+echo "ERROR: Item not found"
+fi
